@@ -13,7 +13,7 @@ interface Account {
   ];
 }
 
-export async function getAccounts() {
+export async function useGetAccounts() {
   const res = await fetch(`http://localhost:3000/account`);
   if (!res.ok) {
     throw new Error("Failed to fetch data");
