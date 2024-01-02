@@ -1,25 +1,29 @@
-import { getAccounts } from "@/app/hooks/getAccounts";
+import { useGetAccounts } from "@/app/hooks/getAccounts";
+import { TbUserEdit } from "react-icons/tb";
+import { IoPersonRemoveOutline } from "react-icons/io5";
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "./ui/table";
 
 export default async function AccountsTable() {
-    const accountsData = await getAccounts();
+  const accountsData = await useGetAccounts();
   return (
     <div>
-      <Table>
+      <Table className="">
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">ID</TableHead>
             <TableHead>Created At</TableHead>
             <TableHead>Updated At</TableHead>
             <TableHead>Balance</TableHead>
-            <TableHead className="text-right">Payments associated</TableHead>
+            <TableHead>Payments</TableHead>
+            <TableHead>Edit</TableHead>
+            <TableHead>Delete</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -29,8 +33,18 @@ export default async function AccountsTable() {
               <TableCell>{account.CreatedAt}</TableCell>
               <TableCell>{account.UpdatedAt}</TableCell>
               <TableCell>{account.Balance}</TableCell>
-              <TableCell className="text-right">
+              <TableCell>
                 {account.Payments.length}
+              </TableCell>
+              <TableCell>
+                <button>
+                  <TbUserEdit />
+                </button>
+              </TableCell>
+              <TableCell>
+                <button>
+                  <IoPersonRemoveOutline />
+                </button>
               </TableCell>
             </TableRow>
           ))}
